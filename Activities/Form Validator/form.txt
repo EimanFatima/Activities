@@ -1,0 +1,45 @@
+'use strict';
+import React, {Component} from 'react';
+import {View, Text, TextInput, TouchableHighlight} from 'react-native';
+import ValidationComponent from 'react-native-form-validator';
+export default class FormTest extends ValidationComponent {
+constructor(props) {
+super(props);
+this.state = {
+name : "",
+school: "",
+cgpa:"",
+regNo:"",
+
+};
+this._onPressButton = this._onPressButton.bind(this);
+}
+
+_onPressButton(){
+var i= this.validate({
+name:{required: true},
+school:{required: true},
+cgpa:{numbers: true,required: true},
+regNo:{numbers: true, required: true}
+});
+if(i== true)
+alert("Form Submitted");
+}
+
+render() {
+return (
+<View>
+<Text>Name</Text><TextInput ref="name" onChangeText={(name) => this.setState({name})} value={this.state.name} />
+<Text>School</Text><TextInput ref="school" onChangeText={(school) => this.setState({school})} value={this.state.school} />
+<Text>CGPA</Text><TextInput ref="cgpa" onChangeText={(cgpa) => this.setState({cgpa})} value={this.state.number} />
+<Text>Registration No</Text><TextInput ref="regNo" onChangeText={(regNo) => this.setState({regNo})} value={this.state.regNo} />
+
+{this.isFieldInError('name') && this.getErrorsInField('name').map(errorMessage => <Text>{errorMessage}</Text>) }
+<TouchableHighlight onPress={this._onPressButton}>
+<Text>Submit</Text>
+</TouchableHighlight>
+<Text> {this.getErrorMessages()} </Text>
+
+</View>
+); }
+}
