@@ -1,0 +1,2 @@
+A basic form validator that checks for any invalid data entry or empty fields on the form . 
+If all the fields are valid and no field is left empty then a message for for form submission is displayed
